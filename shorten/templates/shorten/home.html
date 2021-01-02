@@ -1,0 +1,52 @@
+{% extends "shorten/home_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container text-center ">
+            <div class="align-items-end">
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+            <div class="text-center ">
+                <h1 class="display-4  font-weight-bold" >Clii.cc</h1>
+                <p class="desc">A Simple, neat way to make URLs look better.</p>
+                <form method="POST" id="p-form">
+                    {% csrf_token %}
+                    <div class="row justify-content-center ">
+                        <div class="col-8">
+                            <div class="input-group input-group-lg mt-0 mb-2">
+                                
+                                    {{ form }}
+                                    
+                                    <div class="input-group-append">
+                                        <button class = "btn btn-primary "  type="submit">Shorten</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div id="alert-box"></div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <button class="btn btn-outline-secondary" type="button">Button</button>
+    </div>
+    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+  </div>
+
+
+
+
+ 
