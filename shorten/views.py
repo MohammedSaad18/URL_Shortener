@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, HttpResponseBadRequest
 from .models import ShortURL
 from .forms import ShortenURLForm
 from django.views.generic import View
@@ -31,14 +31,19 @@ def home(request):
     if request.is_ajax():
         if form.is_valid():
             obj_url =  form.cleaned_data.get("url")
-            if request.user.is_authenticated:
-                shorturl = ShortURL(url = obj_url , author = request.user )
-            else:
-                    shorturl = ShortURL(url = obj_url)
-            shorturl.save()
-            data['shorturl'] =  shorturl.get_absolute_url()
+            shortcode = form.cleaned_data.get("shortcode")
 
-            return JsonResponse(data)
+            if request.user.is_authenticated:
+                shorturl = ShortURL(url = obj_url, shortcode = shortcode, author = request.user )
+            else:
+                shorturl = ShortURL(url = obj_url, shortcode = shortcode)
+            try:
+                shorturl.save()
+                data['shorturl'] = shorturl.get_absolute_url(request.get_host())
+            except Exception as e:
+               return HttpResponseBadRequest(e)
+
+        return JsonResponse(data)
 
     context= {
         'form' : form
@@ -77,6 +82,5 @@ def short_url_redirect(request,shortcode=None):
     obj = get_object_or_404(ShortURL, shortcode = shortcode)
     obj_url = obj.url
     return HttpResponseRedirect(obj_url)
-    return HttpResponse("short = {sc} , user = {usr} , url = {url}".format(sc=shortcode, usr = request.user , url = obj_url))
 
 
