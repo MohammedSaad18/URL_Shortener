@@ -15,7 +15,8 @@ def validate_url(value):
 
 
 class ShortenURLForm(forms.Form):
-    url = forms.CharField(label = '' , validators=[validate_url],widget=forms.TextInput(attrs={'class' : 'form-control'}))
+    url = forms.CharField(label = '' , validators=[validate_url], widget=forms.TextInput(attrs={'class' : 'form-control'}))
+    shortcode = forms.CharField(label = 'Prefered Code', max_length=6, required=False, widget=forms.TextInput(attrs={'class' : 'form-control'}))
 
     def clean_url(self):
         data = self.cleaned_data['url']

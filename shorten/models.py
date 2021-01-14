@@ -17,8 +17,13 @@ class ShortURL(models.Model):
     def save(self, *args, **kwargs):
         if self.shortcode == None or self.shortcode == "":
             self.shortcode = create_shortcode(self)
+        else:
+            shortcodeExists = ShortURL.objects.filter(shortcode = self.shortcode)
+            if shortcodeExists:
+                raise Exception("Short code already exists.")
+
         return super(ShortURL,self).save(*args, **kwargs)
 
-    def get_absolute_url(self):
-        return "localhost:8000/"+self.shortcode
+    def get_absolute_url(self, host):
+        return host + "/" + self.shortcode
 
