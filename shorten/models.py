@@ -5,7 +5,7 @@ from .utils import create_shortcode
 # Create your models here.
 class ShortURL(models.Model):
     """
-    docstring
+        docstring
     """
     url = models.CharField(max_length=200)
     shortcode = models.CharField(max_length=15,unique=True,  blank=True)
@@ -20,5 +20,6 @@ class ShortURL(models.Model):
         return super(ShortURL,self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return "localhost:8000/"+self.shortcode
+        return "localhost:8000/"+ self.shortcode
+
 
