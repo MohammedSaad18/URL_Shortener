@@ -19,7 +19,7 @@ class ShortenURLForm(forms.Form):
 
     def clean_url(self):
         data = self.cleaned_data['url']
-        if "http://" not in data:
+        if "http://" not in data and "https://" not in data:
             data = "http://"+ data
         return data
     

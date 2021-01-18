@@ -20,19 +20,38 @@ from shorten import views as shorten_views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-
+from dashboard import views as dashboard_views
 
 urlpatterns = [
 
-    path('', shorten_views.home, name = 'home'), 
+    path('', shorten_views.home, name='home'),
     path('admin/', admin.site.urls),
-    path('dashboard/', users_views.dashboard, name = 'dashboard'),
+    path('dashboard/', users_views.dashboard, name='dashboard'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-    path('register/', users_views.register, name = 'register'),
-    path('<slug:shortcode>', shorten_views.short_url_redirect, name = 'short_code'),
+    path('register/', users_views.register, name='register'),
+    path('api/lineplot/', dashboard_views.LinePlotAllURLS.as_view(), name='lineplot'),
+    path('api/lineplot/<slug:shortcode>',
+         dashboard_views.LinePlotURL.as_view(), name='lineploturl'),
+
+    path('api/countryplot/', dashboard_views.CountriesAllURLS.as_view(),
+         name='countryplot'),
+    path('api/countryplot/<slug:shortcode>',
+         dashboard_views.CountriesURL.as_view(), name='countryploturl'),
+
+
+    path('api/osplot/', dashboard_views.OsAllURLS.as_view(),
+         name='osplot'),
+    path('api/osplot/<slug:shortcode>',
+         dashboard_views.OsURL.as_view(), name='osploturl'),
+
+    path('api/shorturls/', shorten_views.ListShortURLs.as_view(),
+         name='ListShortURLS'),
+    path('<slug:shortcode>', shorten_views.short_url_redirect, name='short_code'),
+
 ]
 
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
