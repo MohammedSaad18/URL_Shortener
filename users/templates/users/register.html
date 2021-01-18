@@ -1,18 +1,19 @@
+{% extends "users/form_base.html" %}
 {% load crispy_forms_tags %}
+
+{% block header %}
+<legend>Join Today</legend>
+
+{% endblock header %}
+
 {% block content %}
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset>
-                <legend>Join Today</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div >
-                <button  type="submit">Sign Up</button>
-            </div>
-        </form>
+{% crispy form %}
+{% endblock content %}
+
+{% block footer %}
         <div >
             <small>
-                Already Have An Account? <a href="#">Sign In</a>
+                Already Have An Account? <a href="{% url 'login' %}">Sign In</a>
             </small>
         </div>
-{% endblock content %}
+{% endblock footer %}
