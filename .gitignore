@@ -1,0 +1,6 @@
+url_shorten/
+**/__pycache__
+.vscode/
+db.sqlite3
+Frontend/dashbaord/node_modules/
+Frontend/node_modules/
