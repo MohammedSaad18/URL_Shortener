@@ -11,6 +11,7 @@
     "lodash": "^4.17.20",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
@@ -18,7 +19,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "collect": "react-scripts build && npm run build-rename",
+    "build-rename": "npm run build-rename-js && npm run build-rename-css && npm run build-rename-logo",
+    "build-rename-logo": "renamer --regex --find '([^\\.])\\.[^\\.]+\\.(\\w+)' --replace '$1.$2' build/static/media/*",
+    "build-rename-js": "renamer --regex --find 'main\\.[^\\.]+\\.js' --replace 'reactify-django.ui.js' build/static/js/*.js",
+    "build-rename-css": "renamer --regex --find 'main\\.[^\\.]+\\.css' --replace 'reactify-django.ui.css' build/static/css/*.css"
   },
   "eslintConfig": {
     "extends": [

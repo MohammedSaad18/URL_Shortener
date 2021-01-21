@@ -9,12 +9,12 @@ const OsChart = (props) => {
   let [Data, setData] = useState({ data: [], labels: [] });
 
   useEffect(() => {
-      const url = props.url + props.shortcode;
+    const url = props.url + props.shortcode;
     axios.get(url).then((response) => setData(response.data));
-  }, [props.url,props.shortcode]);
+  }, [props.url, props.shortcode]);
 
   useEffect(() => {
-      console.log(props.id)
+    console.log(props.id);
     const ctx = document.getElementById(props.id);
     new ChartFunc(ctx, {
       type: "doughnut",
@@ -23,7 +23,7 @@ const OsChart = (props) => {
         datasets: [
           {
             label: "# of Votes",
-            data: Data.data,
+            data: Data.data.length === 0 ? [0] : Data.data,
             backgroundColor: [
               "rgb(54, 162, 235)",
               "rgb(255, 205, 86)",

@@ -3,6 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
+from django.contrib.auth.decorators import login_required
+
 
 from .models import Click
 from django.db.models import Count
@@ -136,6 +138,7 @@ class OsURL(APIView):
         return Response(content)
 # Click.objects.all().filter(shorturl__author=user).values('country').annotate(count=Count('id'))
 
+
 class RefererURL(APIView):
     #permission_classes = [IsAuthenticated]
 
@@ -156,3 +159,8 @@ class RefererURL(APIView):
 
         content = {'data': data, 'labels': labels}
         return Response(content)
+
+
+@login_required
+def dashboard(request):
+    return render(request, 'dashboard/dashboard.html')

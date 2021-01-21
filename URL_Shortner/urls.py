@@ -26,9 +26,9 @@ urlpatterns = [
 
     path('', shorten_views.home, name='home'),
     path('admin/', admin.site.urls),
-    path('dashboard/', users_views.dashboard, name='dashboard'),
+    path('dashboard/', dashboard_views.dashboard, name='dashboard'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', users_views.register, name='register'),
     path('api/lineplot/', dashboard_views.LinePlotAllURLS.as_view(), name='lineplot'),
     path('api/lineplot/<slug:shortcode>',
@@ -45,8 +45,8 @@ urlpatterns = [
     path('api/osplot/<slug:shortcode>',
          dashboard_views.OsURL.as_view(), name='osploturl'),
 
-     re_path(r'^api/refererplot/(?P<shortcode>[a-zA-Z0-9]{6})?$',
-         dashboard_views.RefererURL.as_view(), name='refererplot'),
+    re_path(r'^api/refererplot/(?P<shortcode>[a-zA-Z0-9]{6})?$',
+            dashboard_views.RefererURL.as_view(), name='refererplot'),
 
     path('api/shorturls/', shorten_views.ListShortURLs.as_view(),
          name='ListShortURLS'),
