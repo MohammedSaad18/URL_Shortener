@@ -135,3 +135,24 @@ class OsURL(APIView):
         content = {'data': data, 'labels': labels}
         return Response(content)
 # Click.objects.all().filter(shorturl__author=user).values('country').annotate(count=Count('id'))
+
+class RefererURL(APIView):
+    #permission_classes = [IsAuthenticated]
+
+    def get(self, request, shortcode=None, *args, **kwargs):
+
+        if shortcode is not None:
+            clicks = Click.objects.all().filter(shorturl__shortcode=shortcode).values(
+                'referer').annotate(count=Count('id'))
+        else:
+            clicks = Click.objects.all().values(
+                'referer').annotate(count=Count('id'))
+        data = []
+        labels = []
+
+        for click in clicks:
+            data.append(click['count'])
+            labels.append(click['referer'])
+
+        content = {'data': data, 'labels': labels}
+        return Response(content)

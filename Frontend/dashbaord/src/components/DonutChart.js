@@ -5,16 +5,17 @@ import axios from "axios";
 ChartFunc.defaults.global.responsive = true;
 ChartFunc.defaults.global.maintainAspectRatio = false;
 
-const CountryChart = (props) => {
+const OsChart = (props) => {
   let [Data, setData] = useState({ data: [], labels: [] });
 
   useEffect(() => {
-    const url = `http://localhost:8000/api/countryplot/${props.shortcode}`;
+      const url = props.url + props.shortcode;
     axios.get(url).then((response) => setData(response.data));
-  }, [props.shortcode]);
+  }, [props.url,props.shortcode]);
 
   useEffect(() => {
-    const ctx = document.getElementById("CountryChart");
+      console.log(props.id)
+    const ctx = document.getElementById(props.id);
     new ChartFunc(ctx, {
       type: "doughnut",
       data: {
@@ -58,9 +59,9 @@ const CountryChart = (props) => {
 
   return (
     <React.Fragment>
-      <canvas id="CountryChart" width="1" height="1" />
+      <canvas id={props.id} width="1" height="1" />
     </React.Fragment>
   );
 };
 
-export default CountryChart;
+export default OsChart;

@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from users import views as users_views
 from shorten import views as shorten_views
 from django.contrib.auth import views as auth_views
@@ -44,6 +44,9 @@ urlpatterns = [
          name='osplot'),
     path('api/osplot/<slug:shortcode>',
          dashboard_views.OsURL.as_view(), name='osploturl'),
+
+     re_path(r'^api/refererplot/(?P<shortcode>[a-zA-Z0-9]{6})?$',
+         dashboard_views.RefererURL.as_view(), name='refererplot'),
 
     path('api/shorturls/', shorten_views.ListShortURLs.as_view(),
          name='ListShortURLS'),
