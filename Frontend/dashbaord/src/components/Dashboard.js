@@ -16,11 +16,10 @@ import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { mainListItems } from "./listItems";
 import LineChart from "./LineChart";
 import StickyHeadTable from "./Linkstable";
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
-import { NavLink } from 'react-router-dom';
 import DonutChart from "./DonutChart"
 
 function Copyright() {
@@ -28,7 +27,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        URL Shortner
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -163,14 +162,9 @@ export default function Dashboard() {
           >
             Dashboard
           </Typography>
-          {/* <NavLink 
-          to="http://localhost:8000/logout/"
-          > 
-          <IconButton color="inherit">
-              <MeetingRoomIcon />
-          </IconButton>
-          </NavLink> */}
-          
+            <Link color="inherit" href="http://localhost:8000/logout/">
+              <MeetingRoomIcon/>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -185,10 +179,8 @@ export default function Dashboard() {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
+          <Divider />
+          <List>{mainListItems}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
