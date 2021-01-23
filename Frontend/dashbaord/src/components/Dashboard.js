@@ -22,6 +22,7 @@ import StickyHeadTable from "./Linkstable";
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import DonutChart from "./DonutChart"
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -196,8 +197,7 @@ export default function Dashboard() {
             <Grid item xs={12} md={4} lg={4}>
               <Paper className={fixedHeightPaper}>
                 <DonutChart 
-                shortcode={shortcode}
-                id="CountryChart"
+                shortcode = {shortcode}
                 url = "http://localhost:8000/api/countryplot/" />
               </Paper>
             </Grid>
@@ -205,8 +205,7 @@ export default function Dashboard() {
             <Grid item xs={12} md={4} lg={4}>
               <Paper className={fixedHeightPaper}>
                 <DonutChart 
-                shortcode={shortcode}
-                id="OsChart"
+                shortcode = {shortcode}
                 url = "http://localhost:8000/api/osplot/" />
               </Paper>
             </Grid>
@@ -214,8 +213,7 @@ export default function Dashboard() {
             <Grid item xs={12} md={4} lg={4}>
               <Paper className={fixedHeightPaper}>
                 <DonutChart 
-                shortcode={shortcode}
-                id="RefererChart"
+                shortcode = {shortcode}
                 url = "http://localhost:8000/api/refererplot/" />
               </Paper>
             </Grid>
