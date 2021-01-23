@@ -48,7 +48,7 @@ urlpatterns = [
     re_path(r'^api/refererplot/(?P<shortcode>[a-zA-Z0-9]{6})?$',
             dashboard_views.RefererURL.as_view(), name='refererplot'),
 
-    path('api/shorturls/', shorten_views.ListShortURLs.as_view(),
+    path('api/shorturls/', dashboard_views.ListShortURLs.as_view(),
          name='ListShortURLS'),
     path('<slug:shortcode>', shorten_views.short_url_redirect, name='short_code'),
 

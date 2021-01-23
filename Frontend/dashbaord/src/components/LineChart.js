@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Chart as ChartFunc } from "chart.js";
+import { Line } from "react-chartjs-2";
+
 import axios from "axios";
 
 ChartFunc.defaults.global.responsive = true;
@@ -13,30 +15,84 @@ const LineChart = (props) => {
     axios.get(url).then((response) => setData(response.data));
   }, [props.shortcode]);
 
-  useEffect(() => {
-    const ctx = document.getElementById("myChart");
-    new ChartFunc(ctx, {
-      type: "line",
-      data: {
-        labels: Data.labels,
-        datasets: [
-          {
-            label: "# of Votes",
-            data: Data.data,
-            backgroundColor: ["white"],
-            borderColor: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-            borderWidth: 1,
-          },
-        ],
-      },
-    });
-  }, [Data]);
+  // useEffect(() => {
+  //   const ctx = document.getElementById("myChart");
+  //   new ChartFunc(ctx, {
+  //     type: "line",
+  //     data: {
+  //       labels: Data.labels,
+  //       datasets: [
+  //         {
+  //           label: "# of Vistis",
+  //           data: Data.data,
+  //           backgroundColor: ["rgba(237, 86, 128,0.2)"],
+  //           borderColor: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+  //           borderWidth: 1,
+  //         },
+  //       ],
+  //     },
+  //     options: {
+  //       scales: {
+  //         xAxes: [
+  //           {
+  //             gridLines: {
+  //               drawOnChartArea: false,
+  //             },
+  //           },
+  //         ],
+  //         yAxes: [
+  //           {
+  //             gridLines: {
+  //               drawOnChartArea: false,
+  //             },
+  //             ticks: {
+  //               beginAtZero: true,
+  //             },
+  //           },
+  //         ],
+  //       },
+  //     },
+  //   });
+  // }, [Data]);
 
-  return (
-    <React.Fragment>
-      <canvas id="myChart" width="1" height="1" />
-    </React.Fragment>
-  );
+  const getData = () => {
+    return {
+      labels: Data.labels,
+      datasets: [
+        {
+          label: "# of Vistis",
+          data: Data.data,
+          backgroundColor: ["rgba(237, 86, 128,0.2)"],
+          borderColor: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          borderWidth: 1,
+        },
+      ],
+    };
+  };
+
+  const getOptions = {
+    scales: {
+      xAxes: [
+        {
+          gridLines: {
+            drawOnChartArea: false,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          gridLines: {
+            drawOnChartArea: false,
+          },
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+  };
+
+  return <Line data={getData} options={getOptions} />;
 };
 
 export default LineChart;
