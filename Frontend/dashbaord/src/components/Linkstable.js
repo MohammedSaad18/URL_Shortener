@@ -13,6 +13,7 @@ import TimelineIcon from "@material-ui/icons/Timeline";
 const columns = [
   { id: "url", label: "URL", minWidth: 150 },
   { id: "shortcode", label: "ShortCode", minWidth: 90 },
+  { id: "CreatedAt", label: "Created at", minWidth: 90 },
   { id: "viewbutton", label: "", minWidth: 50 },
 ];
 
@@ -51,6 +52,21 @@ export default function StickyHeadTable(props) {
     setPage(0);
   };
 
+  const represent_date = (date) => {
+    date = new Date(date);
+    return (
+      date.getFullYear() +
+      "-" +
+      (date.getMonth() + 1) +
+      "-" +
+      date.getDate() +
+      " " +
+      date.getHours() +
+      ":" +
+      date.getMinutes()
+    );
+  };
+
   return (
     <React.Fragment>
       <TableContainer className={classes.container}>
@@ -81,6 +97,7 @@ export default function StickyHeadTable(props) {
                   >
                     <TableCell>{row.url}</TableCell>
                     <TableCell>{row.shortcode}</TableCell>
+                    <TableCell>{represent_date(row.created_at)}</TableCell>
                     <TableCell>
                       <TimelineIcon
                         onClick={() => props.onURLView(row.shortcode)}

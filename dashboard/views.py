@@ -1,16 +1,26 @@
+from django.db.models import Count
+from .models import Click
+from .serializers import ShortURLSerializer
+import shorten
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
-
-
-from .models import Click
-from django.db.models import Count
+from shorten.models import ShortURL
 
 
 # Create your views here.
+class ListShortURLs(APIView):
+    #permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        #ShortURLs = ShortURL.objects.filter(author=request.user)
+        ShortURLs = ShortURL.objects.all()
+        serializer = ShortURLSerializer(ShortURLs, many=True)
+        return Response(serializer.data)
+
 
 class LinePlotAllURLS(APIView):
     #permission_classes = [IsAuthenticated]
