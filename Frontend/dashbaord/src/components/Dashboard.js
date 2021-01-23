@@ -117,6 +117,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const server_url = process.env.REACT_APP_URL;
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -198,7 +199,7 @@ export default function Dashboard() {
               <Paper className={fixedHeightPaper}>
                 <DonutChart 
                 shortcode = {shortcode}
-                url = "http://localhost:8000/api/countryplot/" />
+                url = {`${server_url}/api/countryplot/`} />
               </Paper>
             </Grid>
 
