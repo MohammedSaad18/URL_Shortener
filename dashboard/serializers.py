@@ -6,3 +6,5 @@ class ShortURLSerializer(serializers.Serializer):
     shortcode = serializers.CharField(
         max_length=15,   allow_blank=True)
     created_at = serializers.DateTimeField()
+    url_name = serializers.CharField(
+        max_length=100, allow_blank=True)
