@@ -9,7 +9,7 @@ a URL Shortner website, that comes with a dashboard to track every shortned URL
 
 
 
-#How To Run the Project
+# How To Run the Project
 ```
 python3 -m venv project/venv
 cd project
