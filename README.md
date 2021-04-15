@@ -2,8 +2,10 @@
 a URL Shortner website, that comes with a dashboard to track every shortned URL
 
 # Technologies Used
+- Python
 - Django
 - Django rest framework
+- Javascript
 - React
 
 
